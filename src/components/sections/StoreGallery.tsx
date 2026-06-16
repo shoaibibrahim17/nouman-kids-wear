@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import { Images } from "lucide-react";
 
 import { fadeInUp, staggerContainer, viewportOnce } from "@/lib/animations";
 import { Section, SectionHeading } from "@/components/common/Section";
+import { OnesieDoodle, TeddyDoodle } from "@/components/common/Doodles";
 import { cn } from "@/lib/utils";
 
 // Placeholder storefront/interior shots. Replace with real Nouman shop &
@@ -65,11 +65,12 @@ export function StoreGallery() {
                 className="object-cover transition-transform duration-500 ease-out hover:scale-[1.04]"
               />
             ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center gap-1.5 bg-cream text-center text-muted-foreground">
-                <Images className="size-5" />
+              <div className="relative flex h-full w-full flex-col items-center justify-center gap-1.5 overflow-hidden bg-cream text-center text-muted-foreground">
+                <OnesieDoodle className="doodle-float size-7 text-blush-foreground/60" />
                 <span className="px-2 text-[0.7rem] leading-snug">
                   Photos coming soon
                 </span>
+                <TeddyDoodle className="pointer-events-none absolute -bottom-2 -right-2 size-12 text-mint-foreground/15" />
               </div>
             )}
           </motion.div>

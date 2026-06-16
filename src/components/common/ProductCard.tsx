@@ -35,7 +35,7 @@ export function ProductCard({
     <motion.article
       variants={fadeInUp}
       className={cn(
-        "group flex flex-col overflow-hidden rounded-xl border border-border/70 bg-card transition-shadow hover:shadow-[0_10px_30px_-12px_rgba(60,40,40,0.18)]",
+        "group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-blush-foreground/30 hover:shadow-[0_18px_40px_-18px_rgba(120,70,90,0.35)]",
         className,
       )}
     >
@@ -45,8 +45,8 @@ export function ProductCard({
           alt={`${product.name} — ${CATEGORY_LABELS[product.category]} at Nouman Kids Wear, Adilabad`}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 280px"
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
-          preload={priority}
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+          priority={priority}
         />
         {product.badge && (
           <span

@@ -34,7 +34,7 @@ export function FeaturedCollections() {
             href={collectionEnquiryUrl(collection.title)}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative flex flex-col overflow-hidden rounded-xl border border-border/70 bg-card"
+            className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(120,70,90,0.35)]"
           >
             <div className="relative aspect-[5/6] w-full overflow-hidden bg-muted">
               <Image
@@ -42,8 +42,8 @@ export function FeaturedCollections() {
                 alt={`${collection.title} — kids collection at Nouman Kids Wear, Adilabad`}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px"
-                className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
-                preload={i === 0}
+                className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+                priority={i === 0}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-4">

@@ -49,9 +49,9 @@ export function WhyShopWithUs() {
           <motion.div
             key={point.title}
             variants={fadeInUp}
-            className="rounded-xl border border-border/70 bg-card p-5"
+            className="rounded-2xl border border-border/50 bg-card p-5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_16px_36px_-20px_rgba(120,70,90,0.4)]"
           >
-            <span className="inline-flex size-10 items-center justify-center rounded-lg bg-secondary text-foreground">
+            <span className="neo-sm inline-flex size-10 items-center justify-center rounded-xl bg-card text-blush-foreground">
               <point.icon className="size-5" />
             </span>
             <h3 className="mt-3.5 text-[0.95rem] font-medium text-foreground">

@@ -185,6 +185,59 @@
   @apply text-[0.7rem] font-medium uppercase tracking-[0.18em] text-muted-foreground;
 }
 
+/* ── Controlled neomorphism ───────────────────────────────────────────────
+   Soft pastel "pillow" shadows. Applied sparingly to selected elements only
+   (category tiles, slider frame, product cards, CTA panels) — not every box. */
+@utility neo {
+  box-shadow:
+    8px 8px 24px rgba(214, 170, 190, 0.22),
+    -8px -8px 24px rgba(255, 255, 255, 0.9);
+}
+
+/* Lighter variant for smaller controls like pills. */
+@utility neo-sm {
+  box-shadow:
+    4px 4px 12px rgba(214, 170, 190, 0.2),
+    -4px -4px 12px rgba(255, 255, 255, 0.85);
+}
+
+/* Pressed/inset look for active pills and recessed frames. */
+@utility neo-inset {
+  box-shadow:
+    inset 4px 4px 10px rgba(214, 170, 190, 0.22),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.85);
+}
+
+/* Brand wordmark: restrained pastel gradient matching the logo colours, with a
+   soft shadow. Used for the large hero title. Pairs with font-heading. */
+@utility brand-wordmark {
+  background-image: linear-gradient(
+    105deg,
+    oklch(0.55 0.13 350) 0%,
+    oklch(0.52 0.11 300) 42%,
+    oklch(0.52 0.1 235) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gentle floating motion for decorative doodles. Disabled for reduced motion
+   via the media query below. */
+@keyframes nkw-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@utility doodle-float {
+  animation: nkw-float 6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -37,25 +37,29 @@ export function Header() {
           : "border-transparent bg-background/40 backdrop-blur-sm",
       )}
     >
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:h-[4.5rem] sm:px-6">
         {/* Brand */}
-        <a href="#top" className="flex items-center gap-2.5" aria-label={SITE.name}>
-          <span className="relative block size-9 shrink-0 overflow-hidden rounded-full ring-1 ring-border">
+        <a
+          href="#top"
+          className="flex items-center gap-2.5 sm:gap-3"
+          aria-label={SITE.name}
+        >
+          <span className="relative block size-10 shrink-0 sm:size-12">
             <Image
               src="/brand/nouman-logo.png"
               alt={`${SITE.name} logo`}
               fill
-              sizes="36px"
-              className="object-cover"
-              preload
+              priority
+              sizes="48px"
+              className="object-contain"
             />
           </span>
           <span className="flex flex-col leading-none">
-            <span className="font-heading text-[0.95rem] font-semibold tracking-tight">
+            <span className="brand-wordmark font-heading text-[1.15rem] font-semibold tracking-tight sm:text-[1.35rem]">
               {SITE.name}
             </span>
             <span className="mt-0.5 text-[0.62rem] uppercase tracking-[0.16em] text-muted-foreground">
-              Adilabad
+              Adilabad · Telangana
             </span>
           </span>
         </a>
