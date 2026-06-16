@@ -1,0 +1,72 @@
+"use client";
+
+import Image from "next/image";
+import { motion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
+
+import { COLLECTIONS } from "@/data/categories";
+import { collectionEnquiryUrl } from "@/lib/whatsapp";
+import { ACCENT_SOFT } from "@/lib/accents";
+import { fadeInUp, staggerContainer, viewportOnce } from "@/lib/animations";
+import { Section, SectionHeading } from "@/components/common/Section";
+import { cn } from "@/lib/utils";
+
+export function FeaturedCollections() {
+  return (
+    <Section id="collections" className="py-12 sm:py-14">
+      <SectionHeading
+        eyebrow="Curated edits"
+        title="Featured collections"
+        description="Seasonal edits to make picking easier — from festival days to everyday play."
+      />
+
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+        className="mt-7 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4"
+      >
+        {COLLECTIONS.map((collection, i) => (
+          <motion.a
+            key={collection.slug}
+            variants={fadeInUp}
+            href={collectionEnquiryUrl(collection.title)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex flex-col overflow-hidden rounded-xl border border-border/70 bg-card"
+          >
+            <div className="relative aspect-[5/6] w-full overflow-hidden bg-muted">
+              <Image
+                src={collection.image}
+                alt={`${collection.title} — kids collection at Nouman Kids Wear, Adilabad`}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 280px"
+                className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+                preload={i === 0}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-4">
+                <span
+                  className={cn(
+                    "inline-block rounded-full px-2.5 py-0.5 text-[0.62rem] font-medium",
+                    ACCENT_SOFT[collection.accent],
+                  )}
+                >
+                  Collection
+                </span>
+                <h3 className="mt-2 flex items-center gap-1 font-heading text-lg font-semibold text-white">
+                  {collection.title}
+                  <ArrowUpRight className="size-4 opacity-80 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </h3>
+                <p className="mt-1 text-xs leading-snug text-white/85">
+                  {collection.description}
+                </p>
+              </div>
+            </div>
+          </motion.a>
+        ))}
+      </motion.div>
+    </Section>
+  );
+}
