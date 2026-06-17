@@ -6,13 +6,22 @@ interface SectionProps {
   children: React.ReactNode;
 }
 
-/** Consistent page section: max width, horizontal padding, vertical rhythm. */
+/**
+ * Consistent page section: max width, horizontal padding, vertical rhythm.
+ *
+ * Vertical spacing is owned by BOTTOM padding only (mobile-first, stepping up
+ * at sm/lg). Sections have no top padding so that, at every boundary, only the
+ * section above contributes the gap — this avoids the top+bottom padding
+ * compounding into dead space on mobile. The Hero (which has its own bottom
+ * padding) owns the gap above the first section. `scroll-mt` keeps anchor jumps
+ * clear of the sticky header now that top padding is gone.
+ */
 export function Section({ id, className, children }: SectionProps) {
   return (
     <section
       id={id}
       className={cn(
-        "mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 sm:py-16",
+        "mx-auto w-full max-w-6xl scroll-mt-24 px-4 pb-12 sm:px-6 sm:pb-16 lg:pb-20",
         className,
       )}
     >

@@ -33,7 +33,7 @@ const GALLERY: { src: string | null; alt: string; span?: string }[] = [
 
 export function StoreGallery() {
   return (
-    <Section className="py-12 sm:py-14">
+    <Section>
       <SectionHeading
         eyebrow="Inside the shop"
         title="Store gallery"

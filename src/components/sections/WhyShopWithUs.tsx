@@ -31,7 +31,7 @@ const POINTS = [
 
 export function WhyShopWithUs() {
   return (
-    <Section className="py-12 sm:py-14">
+    <Section>
       <SectionHeading
         eyebrow="Why Nouman"
         title="A boutique that gets little wardrobes"

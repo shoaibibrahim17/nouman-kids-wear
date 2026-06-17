@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 export function FeaturedCollections() {
   return (
-    <Section id="collections" className="py-12 sm:py-14">
+    <Section id="collections">
       <SectionHeading
         eyebrow="Curated edits"
         title="Featured collections"

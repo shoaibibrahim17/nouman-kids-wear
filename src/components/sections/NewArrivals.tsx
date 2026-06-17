@@ -13,7 +13,7 @@ export function NewArrivals() {
   const products = NEW_ARRIVALS.slice(0, 8);
 
   return (
-    <Section id="new-arrivals" className="py-12 sm:py-14">
+    <Section id="new-arrivals">
       <SectionHeading
         eyebrow="Just in"
         title="New arrivals"

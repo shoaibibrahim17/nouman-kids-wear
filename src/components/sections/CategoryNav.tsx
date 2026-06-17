@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 
 export function CategoryNav() {
   return (
-    <Section id="categories" className="relative py-12 sm:py-14">
+    <Section id="categories" className="relative">
       {/* Decorative doodles */}
       <SockDoodle className="pointer-events-none absolute right-3 top-8 hidden size-12 text-lilac-foreground/20 sm:block" />
       <ButtonDoodle className="pointer-events-none absolute -bottom-1 left-2 hidden size-10 text-peach-foreground/20 lg:block" />

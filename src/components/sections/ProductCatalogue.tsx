@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { motion } from "motion/react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { Filter, X } from "lucide-react";
 
 import { PRODUCTS } from "@/data/products";
@@ -19,10 +19,43 @@ type CategoryFilter = CategorySlug | "all";
 type GenderFilter = Gender | "all";
 type AgeFilter = AgeGroup | "all";
 
+interface FilterState {
+  category: CategoryFilter;
+  gender: GenderFilter;
+  age: AgeFilter;
+  size: string | "all";
+}
+
+const EMPTY_FILTERS: FilterState = {
+  category: "all",
+  gender: "all",
+  age: "all",
+  size: "all",
+};
+
 // All distinct sizes across the catalogue, kept in a sensible display order.
 const ALL_SIZES = Array.from(
   new Set(PRODUCTS.flatMap((p) => p.sizes)),
 ).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+
+function matchProducts(f: FilterState) {
+  return PRODUCTS.filter((p) => {
+    if (f.category !== "all" && p.category !== f.category) return false;
+    if (f.gender !== "all" && p.gender !== f.gender) return false;
+    if (f.age !== "all" && p.ageGroup !== f.age) return false;
+    if (f.size !== "all" && !p.sizes.includes(f.size)) return false;
+    return true;
+  });
+}
+
+function countActive(f: FilterState) {
+  return (
+    (f.category !== "all" ? 1 : 0) +
+    (f.gender !== "all" ? 1 : 0) +
+    (f.age !== "all" ? 1 : 0) +
+    (f.size !== "all" ? 1 : 0)
+  );
+}
 
 function Chip({
   active,
@@ -51,139 +84,114 @@ function Chip({
 }
 
 export function ProductCatalogue() {
-  const [category, setCategory] = useState<CategoryFilter>("all");
-  const [gender, setGender] = useState<GenderFilter>("all");
-  const [age, setAge] = useState<AgeFilter>("all");
-  const [size, setSize] = useState<string | "all">("all");
+  // Committed filters drive the grid; draft filters are staged inside the sheet.
+  const [committed, setCommitted] = useState<FilterState>(EMPTY_FILTERS);
+  const [draft, setDraft] = useState<FilterState>(EMPTY_FILTERS);
+  const [open, setOpen] = useState(false);
 
-  const filtered = useMemo(() => {
-    return PRODUCTS.filter((p) => {
-      if (category !== "all" && p.category !== category) return false;
-      if (gender !== "all" && p.gender !== gender) return false;
-      if (age !== "all" && p.ageGroup !== age) return false;
-      if (size !== "all" && !p.sizes.includes(size)) return false;
-      return true;
-    });
-  }, [category, gender, age, size]);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
 
-  const hasFilters =
-    category !== "all" || gender !== "all" || age !== "all" || size !== "all";
+  const filtered = useMemo(() => matchProducts(committed), [committed]);
+  const committedCount = countActive(committed);
+  const hasFilters = committedCount > 0;
 
-  const reset = () => {
-    setCategory("all");
-    setGender("all");
-    setAge("all");
-    setSize("all");
+  // Live count for the not-yet-committed draft selection (powers "Apply (N)").
+  const draftMatchCount = useMemo(
+    () => matchProducts(draft).length,
+    [draft],
+  );
+
+  const openSheet = useCallback(() => {
+    // Stage the currently committed filters when opening.
+    setDraft(committed);
+    setOpen(true);
+  }, [committed]);
+
+  const closeSheet = useCallback(() => {
+    // Discard unapplied changes and return focus to the trigger.
+    setOpen(false);
+    triggerRef.current?.focus();
+  }, []);
+
+  const applyDraft = () => {
+    setCommitted(draft);
+    setOpen(false);
+    triggerRef.current?.focus();
   };
 
+  // Clear staged selections (still requires Apply to commit).
+  const clearDraft = () => setDraft(EMPTY_FILTERS);
+
+  // Reset committed filters directly (used by the empty-state button).
+  const resetCommitted = () => setCommitted(EMPTY_FILTERS);
+
+  // Escape-to-close + background scroll lock while the sheet is open.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeSheet();
+    };
+    document.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [open, closeSheet]);
+
   return (
-    <Section id="catalogue" className="scroll-mt-20">
+    <Section id="catalogue">
       <SectionHeading
         eyebrow="Available stock"
         title="Browse the catalogue"
         description="Filter by category, gender, age and size. Prices are shared on request — enquire on WhatsApp to confirm what's in stock."
       />
 
-      {/* Filters */}
-      <div className="mt-7 rounded-xl border border-border/70 bg-card/60 p-4">
-        <div className="mb-3 flex items-center justify-between">
-          <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-            <Filter className="size-3.5" />
-            Filters
-          </span>
+      {/* Filters trigger + result count */}
+      <div className="mt-6 flex items-center justify-between gap-3">
+        <button
+          ref={triggerRef}
+          type="button"
+          onClick={openSheet}
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+        >
+          <Filter className="size-4" />
+          Filters
           {hasFilters && (
-            <button
-              type="button"
-              onClick={reset}
-              className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+            <span
+              className="inline-flex min-w-5 items-center justify-center rounded-full bg-foreground px-1.5 text-[0.65rem] font-semibold leading-5 text-background"
+              aria-label={`${committedCount} active filters`}
             >
-              <X className="size-3" />
-              Clear all
-            </button>
+              {committedCount}
+            </span>
           )}
-        </div>
+        </button>
 
-        <div className="space-y-3">
-          <FilterRow label="Category">
-            <Chip active={category === "all"} onClick={() => setCategory("all")}>
-              All
-            </Chip>
-            {CATEGORIES.map((c) => (
-              <Chip
-                key={c.slug}
-                active={category === c.slug}
-                onClick={() => setCategory(c.slug)}
-              >
-                {c.label}
-              </Chip>
-            ))}
-          </FilterRow>
-
-          <FilterRow label="Gender">
-            <Chip active={gender === "all"} onClick={() => setGender("all")}>
-              All
-            </Chip>
-            {GENDER_OPTIONS.map((g) => (
-              <Chip
-                key={g.value}
-                active={gender === g.value}
-                onClick={() => setGender(g.value)}
-              >
-                {g.label}
-              </Chip>
-            ))}
-          </FilterRow>
-
-          <FilterRow label="Age group">
-            <Chip active={age === "all"} onClick={() => setAge("all")}>
-              All
-            </Chip>
-            {AGE_GROUP_OPTIONS.map((a) => (
-              <Chip
-                key={a.value}
-                active={age === a.value}
-                onClick={() => setAge(a.value)}
-              >
-                {a.label}
-              </Chip>
-            ))}
-          </FilterRow>
-
-          <FilterRow label="Size">
-            <Chip active={size === "all"} onClick={() => setSize("all")}>
-              All
-            </Chip>
-            {ALL_SIZES.map((s) => (
-              <Chip key={s} active={size === s} onClick={() => setSize(s)}>
-                {s}
-              </Chip>
-            ))}
-          </FilterRow>
-        </div>
+        <p className="text-xs text-muted-foreground">
+          {filtered.length} {filtered.length === 1 ? "item" : "items"}
+          {hasFilters ? " · filtered" : ""}
+        </p>
       </div>
 
       {/* Results */}
-      <p className="mt-5 text-xs text-muted-foreground">
-        Showing {filtered.length}{" "}
-        {filtered.length === 1 ? "item" : "items"}
-        {hasFilters ? " for your filters" : ""}.
-      </p>
-
       {filtered.length > 0 ? (
         <motion.div
-          key={`${category}-${gender}-${age}-${size}`}
+          key={`${committed.category}-${committed.gender}-${committed.age}-${committed.size}`}
           variants={staggerContainer}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="mt-3 grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-4"
+          className="mt-5 grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-4"
         >
           {filtered.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </motion.div>
       ) : (
-        <div className="mt-3 flex flex-col items-center gap-3 rounded-xl border border-dashed border-border bg-card/40 px-6 py-12 text-center">
+        <div className="mt-5 flex flex-col items-center gap-3 rounded-xl border border-dashed border-border bg-card/40 px-6 py-12 text-center">
           <p className="text-sm font-medium text-foreground">
             No items match these filters
           </p>
@@ -194,7 +202,7 @@ export function ProductCatalogue() {
           <div className="mt-1 flex gap-2">
             <button
               type="button"
-              onClick={reset}
+              onClick={resetCommitted}
               className="rounded-full border border-border px-4 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-muted"
             >
               Reset filters
@@ -205,11 +213,209 @@ export function ProductCatalogue() {
           </div>
         </div>
       )}
+
+      {/* Bottom-sheet filter dialog */}
+      <FilterSheet
+        open={open}
+        draft={draft}
+        setDraft={setDraft}
+        applyCount={draftMatchCount}
+        draftActiveCount={countActive(draft)}
+        onClose={closeSheet}
+        onApply={applyDraft}
+        onClear={clearDraft}
+      />
     </Section>
   );
 }
 
-function FilterRow({
+function FilterSheet({
+  open,
+  draft,
+  setDraft,
+  applyCount,
+  draftActiveCount,
+  onClose,
+  onApply,
+  onClear,
+}: {
+  open: boolean;
+  draft: FilterState;
+  setDraft: React.Dispatch<React.SetStateAction<FilterState>>;
+  applyCount: number;
+  draftActiveCount: number;
+  onClose: () => void;
+  onApply: () => void;
+  onClear: () => void;
+}) {
+  const panelRef = useRef<HTMLDivElement | null>(null);
+
+  // Move focus into the sheet when it opens (focus the close button).
+  useEffect(() => {
+    if (!open) return;
+    const id = window.setTimeout(() => {
+      panelRef.current
+        ?.querySelector<HTMLButtonElement>("[data-sheet-close]")
+        ?.focus();
+    }, 0);
+    return () => window.clearTimeout(id);
+  }, [open]);
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="fixed inset-0 z-[80] flex items-end justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          {/* Dimmed backdrop — tap to close (discards unapplied changes). */}
+          <button
+            type="button"
+            aria-label="Close filters"
+            tabIndex={-1}
+            onClick={onClose}
+            className="absolute inset-0 cursor-default bg-black/40 backdrop-blur-[2px]"
+          />
+
+          {/* Sheet */}
+          <motion.div
+            ref={panelRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Filters"
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", damping: 32, stiffness: 320 }}
+            className="relative flex h-[84vh] w-full max-w-2xl flex-col rounded-t-3xl border border-b-0 border-border bg-card shadow-[0_-12px_40px_-12px_rgba(60,40,40,0.25)]"
+          >
+            {/* Sticky header */}
+            <div className="sticky top-0 z-10 rounded-t-3xl bg-card px-5 pb-3 pt-2.5">
+              <div className="mx-auto mb-3 h-1.5 w-10 rounded-full bg-border" />
+              <div className="flex items-center justify-between">
+                <h3 className="font-heading text-lg font-semibold text-foreground">
+                  Filters
+                </h3>
+                <button
+                  type="button"
+                  data-sheet-close
+                  onClick={onClose}
+                  aria-label="Close filters"
+                  className="inline-flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-muted"
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Scrollable body */}
+            <div className="flex-1 space-y-6 overflow-y-auto px-5 py-4">
+              <FilterGroup label="Category">
+                <Chip
+                  active={draft.category === "all"}
+                  onClick={() => setDraft((d) => ({ ...d, category: "all" }))}
+                >
+                  All
+                </Chip>
+                {CATEGORIES.map((c) => (
+                  <Chip
+                    key={c.slug}
+                    active={draft.category === c.slug}
+                    onClick={() =>
+                      setDraft((d) => ({ ...d, category: c.slug }))
+                    }
+                  >
+                    {c.label}
+                  </Chip>
+                ))}
+              </FilterGroup>
+
+              <FilterGroup label="Gender">
+                <Chip
+                  active={draft.gender === "all"}
+                  onClick={() => setDraft((d) => ({ ...d, gender: "all" }))}
+                >
+                  All
+                </Chip>
+                {GENDER_OPTIONS.map((g) => (
+                  <Chip
+                    key={g.value}
+                    active={draft.gender === g.value}
+                    onClick={() =>
+                      setDraft((d) => ({ ...d, gender: g.value }))
+                    }
+                  >
+                    {g.label}
+                  </Chip>
+                ))}
+              </FilterGroup>
+
+              <FilterGroup label="Age group">
+                <Chip
+                  active={draft.age === "all"}
+                  onClick={() => setDraft((d) => ({ ...d, age: "all" }))}
+                >
+                  All
+                </Chip>
+                {AGE_GROUP_OPTIONS.map((a) => (
+                  <Chip
+                    key={a.value}
+                    active={draft.age === a.value}
+                    onClick={() => setDraft((d) => ({ ...d, age: a.value }))}
+                  >
+                    {a.label}
+                  </Chip>
+                ))}
+              </FilterGroup>
+
+              <FilterGroup label="Size">
+                <Chip
+                  active={draft.size === "all"}
+                  onClick={() => setDraft((d) => ({ ...d, size: "all" }))}
+                >
+                  All
+                </Chip>
+                {ALL_SIZES.map((s) => (
+                  <Chip
+                    key={s}
+                    active={draft.size === s}
+                    onClick={() => setDraft((d) => ({ ...d, size: s }))}
+                  >
+                    {s}
+                  </Chip>
+                ))}
+              </FilterGroup>
+            </div>
+
+            {/* Sticky footer */}
+            <div className="sticky bottom-0 flex items-center gap-3 border-t border-border bg-card px-5 py-3.5 pb-[max(0.875rem,env(safe-area-inset-bottom))]">
+              <button
+                type="button"
+                onClick={onClear}
+                disabled={draftActiveCount === 0}
+                className="inline-flex h-11 items-center justify-center rounded-full border border-border px-5 text-sm font-medium text-foreground transition-colors hover:bg-muted disabled:opacity-40"
+              >
+                Clear all
+              </button>
+              <button
+                type="button"
+                onClick={onApply}
+                className="inline-flex h-11 flex-1 items-center justify-center rounded-full bg-foreground px-5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+              >
+                Apply ({applyCount})
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+function FilterGroup({
   label,
   children,
 }: {
@@ -217,11 +423,11 @@ function FilterRow({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
-      <span className="w-24 shrink-0 pt-1.5 text-[0.7rem] font-medium uppercase tracking-wide text-muted-foreground">
+    <div>
+      <p className="mb-2.5 text-[0.7rem] font-medium uppercase tracking-wide text-muted-foreground">
         {label}
-      </span>
-      <div className="flex flex-wrap gap-1.5">{children}</div>
+      </p>
+      <div className="flex flex-wrap gap-2">{children}</div>
     </div>
   );
 }
