@@ -7,7 +7,11 @@ export type AgeGroup = "newborn" | "toddler" | "kids" | "juniors";
 
 export type CategorySlug =
   | "boys-wear"
+  | "boys-ethnic-wear"
   | "girls-wear"
+  | "girls-party-wear"
+  | "girls-ethnic-wear"
+  | "girls-lehenga-choli"
   | "newborn"
   | "party-wear"
   | "ethnic-wear"
@@ -30,8 +34,9 @@ export interface Product {
   category: CategorySlug;
   gender: Gender;
   ageGroup: AgeGroup;
+  /** Display-friendly age range (e.g., "1–14 Years", "4–10 Years") */
+  ageRangeDisplay?: string;
   sizes: string[];
-  /** Remote placeholder image — replace with real Nouman stock photos. */
   image: string;
   /** This is a catalogue, not a store, so we never show exact prices. */
   price: "Price on request";

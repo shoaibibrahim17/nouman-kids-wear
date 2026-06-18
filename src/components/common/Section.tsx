@@ -21,7 +21,7 @@ export function Section({ id, className, children }: SectionProps) {
     <section
       id={id}
       className={cn(
-        "mx-auto w-full max-w-6xl scroll-mt-24 px-4 pb-12 sm:px-6 sm:pb-16 lg:pb-20",
+        "mx-auto w-full max-w-6xl scroll-mt-20 px-3.5 pb-10 sm:scroll-mt-24 sm:px-6 sm:pb-14 lg:pb-18",
         className,
       )}
     >
@@ -50,7 +50,7 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3",
+        "flex flex-col gap-2.5 sm:gap-3",
         align === "center" && "items-center text-center",
         action && "sm:flex-row sm:items-end sm:justify-between",
         className,
@@ -58,11 +58,11 @@ export function SectionHeading({
     >
       <div className={cn("max-w-2xl", align === "center" && "mx-auto")}>
         {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-        <h2 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+        <h2 className="mt-1.5 font-heading text-xl font-semibold tracking-tight text-foreground sm:mt-2 sm:text-2xl lg:text-3xl">
           {title}
         </h2>
         {description && (
-          <p className="mt-2.5 text-[0.95rem] leading-relaxed text-muted-foreground">
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:mt-2.5 sm:text-[0.95rem]">
             {description}
           </p>
         )}

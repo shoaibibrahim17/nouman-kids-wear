@@ -8,10 +8,34 @@ export const CATEGORIES: Category[] = [
     accent: "sky",
   },
   {
+    slug: "boys-ethnic-wear",
+    label: "Boys Ethnic Wear",
+    description: "Sherwanis, kurtas & festive sets",
+    accent: "peach",
+  },
+  {
     slug: "girls-wear",
     label: "Girls Wear",
     description: "Frocks, tops & dresses",
     accent: "blush",
+  },
+  {
+    slug: "girls-party-wear",
+    label: "Girls Party Wear",
+    description: "Gowns & party dresses",
+    accent: "lilac",
+  },
+  {
+    slug: "girls-ethnic-wear",
+    label: "Girls Ethnic Wear",
+    description: "Ethnic gowns & traditional sets",
+    accent: "peach",
+  },
+  {
+    slug: "girls-lehenga-choli",
+    label: "Girls Lehenga Choli",
+    description: "Lehengas with choli & dupatta",
+    accent: "peach",
   },
   {
     slug: "newborn",
@@ -59,32 +83,27 @@ export const COLLECTIONS: Collection[] = [
     title: "Festival Wear",
     description: "Eid, Diwali & wedding-ready ethnic looks for little ones.",
     accent: "peach",
-    // Placeholder image — replace with real shop photography.
-    image:
-      "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/products/boys/girls/girls-olive-green-lehenga-choli-4-14yr.jpeg",
   },
   {
     slug: "party-wear",
     title: "Party Wear",
     description: "Twirl-worthy frocks and sharp sets for birthdays & events.",
     accent: "lilac",
-    image:
-      "https://images.unsplash.com/photo-1503944168849-8bf86875bbd8?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/products/boys/girls/girls-white-party-gown-1-14yr.jpeg",
   },
   {
     slug: "casual-wear",
     title: "Casual Wear",
     description: "Soft, playful everyday outfits made for movement.",
     accent: "sky",
-    image:
-      "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/products/boys/girls/girls-dusty-pink-princess-gown-4-10yr.jpeg",
   },
   {
     slug: "newborn-essentials",
     title: "Newborn Essentials",
     description: "Gentle fabrics and starter sets for the newest arrivals.",
     accent: "mint",
-    image:
-      "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/products/boys/girls/girls-mint-green-embroidered-gown-4-10yr.jpeg",
   },
 ];

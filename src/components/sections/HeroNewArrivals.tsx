@@ -9,65 +9,99 @@ import { CATEGORY_LABELS } from "@/data/categories";
 import { cn } from "@/lib/utils";
 
 // Auto-transitioning mini slider of new arrivals for the hero's right side.
-// Spec: new arrivals should change every 1–2s.
-const AUTOPLAY_MS = 1500;
+// Spec: new arrivals should change every 1.5–2s.
+const AUTOPLAY_MS = 1800;
 
 export function HeroNewArrivals() {
-  const slides = NEW_ARRIVALS.slice(0, 5);
+  const slides = NEW_ARRIVALS.slice(0, 4); // Only show 4 new arrivals as specified
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center" });
   const [selected, setSelected] = useState(0);
-  // Pause auto-advance on hover/focus (desktop) so users can read a slide.
   const pausedRef = useRef(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelected(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
 
+  // Setup embla event listeners
   useEffect(() => {
     if (!emblaApi) return;
-    // Sync initial slide index from the embla instance (an external system).
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    
     onSelect();
     emblaApi.on("select", onSelect);
     emblaApi.on("reInit", onSelect);
+    
     return () => {
       emblaApi.off("select", onSelect);
       emblaApi.off("reInit", onSelect);
     };
   }, [emblaApi, onSelect]);
 
-  // Reliable auto-transition via setInterval. Respects reduced motion, pauses
-  // when the tab is hidden or the user is hovering/focusing, and is always
-  // cleared on unmount.
+  // Auto-advance carousel
   useEffect(() => {
     if (!emblaApi) return;
-    const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
+    
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (reduce) return;
+    
+    if (prefersReducedMotion) return;
 
-    const id = setInterval(() => {
-      if (document.hidden || pausedRef.current) return;
-      emblaApi.scrollNext();
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    // Start auto-advance
+    intervalRef.current = setInterval(() => {
+      // Don't advance if tab is hidden or user is interacting
+      if (document.hidden || pausedRef.current) {
+        return;
+      }
+      
+      // Scroll to next slide
+      if (emblaApi.canScrollNext()) {
+        emblaApi.scrollNext();
+      } else {
+        // Loop back to start
+        emblaApi.scrollTo(0);
+      }
     }, AUTOPLAY_MS);
-    return () => clearInterval(id);
+
+    // Cleanup on unmount
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [emblaApi]);
 
-  const pause = () => {
+  const handleMouseEnter = () => {
     pausedRef.current = true;
   };
-  const resume = () => {
+
+  const handleMouseLeave = () => {
+    pausedRef.current = false;
+  };
+
+  const handleFocus = () => {
+    pausedRef.current = true;
+  };
+
+  const handleBlur = () => {
     pausedRef.current = false;
   };
 
   return (
     <div
       className="relative"
-      onMouseEnter={pause}
-      onMouseLeave={resume}
-      onFocusCapture={pause}
-      onBlurCapture={resume}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
     >
       {/* Soft neomorphic pastel frame */}
       <div className="neo rounded-3xl border border-border/60 bg-card/85 p-2.5 backdrop-blur-sm">
@@ -82,7 +116,7 @@ export function HeroNewArrivals() {
                     alt={`${product.name} — new arrival at Nouman Kids Wear`}
                     fill
                     sizes="(max-width: 1024px) 80vw, 420px"
-                    className="object-cover"
+                    className="object-cover object-[center_top]"
                     priority={i === 0}
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3.5 pt-10">

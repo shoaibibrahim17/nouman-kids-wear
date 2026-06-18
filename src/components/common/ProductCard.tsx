@@ -45,7 +45,7 @@ export function ProductCard({
           alt={`${product.name} — ${CATEGORY_LABELS[product.category]} at Nouman Kids Wear, Adilabad`}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 280px"
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+          className="object-cover object-[center_top] transition-transform duration-500 ease-out group-hover:scale-[1.06]"
           priority={priority}
         />
         {product.badge && (
@@ -60,30 +60,40 @@ export function ProductCard({
         )}
       </div>
 
-      <div className={cn("flex flex-1 flex-col p-3.5", compact && "p-3")}>
+      <div className={cn("flex flex-1 flex-col p-3", compact && "p-2.5 sm:p-3")}>
         <p className="eyebrow">{CATEGORY_LABELS[product.category]}</p>
         <h3
           className={cn(
             "mt-1 font-medium leading-snug text-foreground",
-            compact ? "text-sm" : "text-[0.95rem]",
+            compact ? "text-[0.82rem] sm:text-sm" : "text-[0.88rem] sm:text-[0.95rem]",
           )}
         >
           {product.name}
         </h3>
 
-        <div className="mt-2 flex flex-wrap gap-1">
-          {product.sizes.slice(0, compact ? 3 : 4).map((size) => (
-            <span
-              key={size}
-              className="rounded-md border border-border/70 px-1.5 py-0.5 text-[0.65rem] text-muted-foreground"
-            >
-              {size}
-            </span>
-          ))}
-        </div>
+        {/* Age range display */}
+        {product.ageRangeDisplay && (
+          <p className="mt-1.5 text-[0.68rem] text-muted-foreground sm:text-[0.7rem]">
+            <span className="font-medium">Age:</span> {product.ageRangeDisplay}
+          </p>
+        )}
 
-        <div className="mt-auto flex items-center justify-between gap-2 pt-3">
-          <span className="text-[0.7rem] font-medium uppercase tracking-wide text-muted-foreground">
+        {/* Size display - only show if sizes exist */}
+        {product.sizes.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1">
+            {product.sizes.slice(0, compact ? 3 : 4).map((size) => (
+              <span
+                key={size}
+                className="rounded-md border border-border/70 px-1.5 py-0.5 text-[0.62rem] text-muted-foreground sm:text-[0.65rem]"
+              >
+                Size: {size}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-auto flex items-center justify-between gap-2 pt-2.5 sm:pt-3">
+          <span className="text-[0.68rem] font-medium uppercase tracking-wide text-muted-foreground sm:text-[0.7rem]">
             {product.price}
           </span>
           <WhatsAppButton

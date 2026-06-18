@@ -50,7 +50,7 @@ export function Hero() {
       />
       <HangerDoodle className="pointer-events-none absolute right-[4%] bottom-[16%] hidden size-12 text-lilac-foreground/25 lg:block" />
 
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pb-16 pt-24 sm:px-6 sm:pb-20 sm:pt-28 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-8 px-3.5 pb-12 pt-20 sm:gap-10 sm:px-6 sm:pb-16 sm:pt-24 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-20 lg:pt-28">
         {/* Copy */}
         <motion.div
           variants={staggerContainer}
@@ -60,18 +60,18 @@ export function Hero() {
         >
           <motion.span
             variants={fadeInUp}
-            className="neo-sm inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/80 px-3.5 py-1.5 text-[0.72rem] font-medium text-muted-foreground backdrop-blur-sm"
+            className="neo-sm inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/80 px-3 py-1.5 text-[0.68rem] font-medium text-muted-foreground backdrop-blur-sm sm:px-3.5 sm:text-[0.72rem]"
           >
-            <Sparkles className="size-3.5 text-peach-foreground" />
+            <Sparkles className="size-3 text-peach-foreground sm:size-3.5" />
             Boutique kidswear in {SITE.address.city}
           </motion.span>
 
           {/* Brand lockup — large logo + wordmark. This is the semantic h1. */}
           <motion.h1
             variants={fadeInUp}
-            className="mt-5 flex items-center gap-3.5 sm:gap-4"
+            className="mt-4 flex items-center gap-3 sm:mt-5 sm:gap-3.5"
           >
-            <span className="relative block size-16 shrink-0 sm:size-20">
+            <span className="relative block size-14 shrink-0 sm:size-16 lg:size-20">
               <Image
                 src="/brand/nouman-logo.png"
                 alt={`${SITE.name} logo`}
@@ -81,7 +81,7 @@ export function Hero() {
                 className="object-contain drop-shadow-[0_6px_14px_rgba(120,70,90,0.18)]"
               />
             </span>
-            <span className="brand-wordmark font-heading text-[2.4rem] font-semibold leading-[1.02] tracking-tight sm:text-[3.4rem]">
+            <span className="brand-wordmark font-heading text-[2.8rem] font-semibold leading-[1.02] tracking-tight sm:text-[3.4rem] lg:text-[4rem]">
               Nouman
               <span className="block">Kids Wear</span>
             </span>
@@ -90,7 +90,7 @@ export function Hero() {
           {/* Tagline / sub-headline */}
           <motion.p
             variants={fadeInUp}
-            className="mt-5 font-heading text-xl font-medium text-foreground sm:text-2xl"
+            className="mt-4 font-heading text-lg font-medium text-foreground sm:mt-5 sm:text-xl lg:text-2xl"
           >
             Dressed for every{" "}
             <span className="italic text-primary">little</span> occasion.
@@ -98,7 +98,7 @@ export function Hero() {
 
           <motion.p
             variants={fadeInUp}
-            className="mt-3 max-w-md text-[0.98rem] leading-relaxed text-muted-foreground"
+            className="mt-2.5 max-w-md text-[0.92rem] leading-relaxed text-muted-foreground sm:mt-3 sm:text-[0.98rem]"
           >
             Boys, girls & newborn readymade garments — casual, party and ethnic
             wear, handpicked for {SITE.address.city}. Browse our latest stock and
@@ -107,14 +107,14 @@ export function Hero() {
 
           <motion.div
             variants={fadeInUp}
-            className="mt-7 flex flex-wrap items-center gap-3"
+            className="mt-6 flex flex-wrap items-center gap-2.5 sm:mt-7 sm:gap-3"
           >
             <WhatsAppButton href={generalEnquiryUrl()} size="lg">
               Enquire on WhatsApp
             </WhatsAppButton>
             <a
               href="#catalogue"
-              className="inline-flex h-12 items-center gap-1.5 rounded-full border border-border bg-card/70 px-5 text-[0.95rem] font-medium text-foreground backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:bg-card hover:shadow-[0_10px_24px_-12px_rgba(60,40,40,0.3)]"
+              className="inline-flex h-11 items-center gap-1.5 rounded-full border border-border bg-card/70 px-4 text-sm font-medium text-foreground backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:bg-card hover:shadow-[0_10px_24px_-12px_rgba(60,40,40,0.3)] sm:h-12 sm:px-5 sm:text-[0.95rem]"
             >
               Browse catalogue
               <ArrowRight className="size-4" />
@@ -123,25 +123,25 @@ export function Hero() {
 
           <motion.dl
             variants={fadeInUp}
-            className="mt-9 flex gap-6 border-t border-border/60 pt-5"
+            className="mt-7 flex gap-5 border-t border-border/60 pt-4 sm:mt-9 sm:gap-6 sm:pt-5"
           >
             <div>
-              <dt className="font-heading text-xl font-semibold text-foreground">
+              <dt className="font-heading text-lg font-semibold text-foreground sm:text-xl">
                 7+
               </dt>
-              <dd className="text-xs text-muted-foreground">Categories</dd>
+              <dd className="text-[0.7rem] text-muted-foreground sm:text-xs">Categories</dd>
             </div>
             <div>
-              <dt className="font-heading text-xl font-semibold text-foreground">
+              <dt className="font-heading text-lg font-semibold text-foreground sm:text-xl">
                 0–14y
               </dt>
-              <dd className="text-xs text-muted-foreground">Newborn to junior</dd>
+              <dd className="text-[0.7rem] text-muted-foreground sm:text-xs">Newborn to junior</dd>
             </div>
             <div>
-              <dt className="font-heading text-xl font-semibold text-foreground">
+              <dt className="font-heading text-lg font-semibold text-foreground sm:text-xl">
                 WhatsApp
               </dt>
-              <dd className="text-xs text-muted-foreground">Quick enquiry</dd>
+              <dd className="text-[0.7rem] text-muted-foreground sm:text-xs">Quick enquiry</dd>
             </div>
           </motion.dl>
         </motion.div>

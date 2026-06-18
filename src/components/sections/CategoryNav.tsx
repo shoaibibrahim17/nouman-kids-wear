@@ -28,7 +28,7 @@ export function CategoryNav() {
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="mt-7 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-7"
+        className="mt-7 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-2.5 lg:grid-cols-7"
       >
         {CATEGORIES.map((category) => (
           <motion.li key={category.slug} variants={fadeInUp}>
