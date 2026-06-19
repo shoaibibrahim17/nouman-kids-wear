@@ -9,7 +9,7 @@ import type { Product } from "@/types/product";
 export const PRODUCTS: Product[] = [
   {
     id: "boys-black-ethnic-sherwani",
-    name: "Boys Black Ethnic Sherwani",
+    name: "Boys Black Sherwani",
     category: "boys-ethnic-wear",
     gender: "boys",
     ageGroup: "kids",
@@ -25,7 +25,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "girls-white-party-gown",
-    name: "Girls White Party Gown",
+    name: "White Party Gown",
     category: "girls-party-wear",
     gender: "girls",
     ageGroup: "kids",
@@ -39,7 +39,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "girls-maroon-jacket-gown",
-    name: "Girls Maroon Jacket Gown",
+    name: "Maroon Jacket Gown",
     category: "girls-ethnic-wear",
     gender: "girls",
     ageGroup: "kids",
@@ -55,7 +55,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "girls-dusty-pink-princess-gown",
-    name: "Girls Dusty Pink Princess Gown",
+    name: "Dusty Pink Princess Gown",
     category: "girls-party-wear",
     gender: "girls",
     ageGroup: "kids",
@@ -68,7 +68,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "girls-rose-gold-party-gown",
-    name: "Girls Rose Gold Party Gown",
+    name: "Rose Gold Party Gown",
     category: "girls-party-wear",
     gender: "girls",
     ageGroup: "kids",
@@ -82,7 +82,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "girls-mint-green-embroidered-gown",
-    name: "Girls Mint Green Embroidered Gown",
+    name: "Mint Green Embroidered Gown",
     category: "girls-ethnic-wear",
     gender: "girls",
     ageGroup: "kids",
@@ -98,7 +98,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "girls-black-embroidered-ethnic-gown",
-    name: "Girls Black Embroidered Ethnic Gown",
+    name: "Black Embroidered Gown",
     category: "girls-ethnic-wear",
     gender: "girls",
     ageGroup: "kids",
@@ -111,7 +111,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "girls-beige-gold-lehenga-choli",
-    name: "Girls Beige Gold Lehenga Choli",
+    name: "Beige Gold Lehenga Set",
     category: "girls-lehenga-choli",
     gender: "girls",
     ageGroup: "kids",
@@ -124,7 +124,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "girls-olive-green-lehenga-choli",
-    name: "Girls Olive Green Lehenga Choli",
+    name: "Olive Green Lehenga Set",
     category: "girls-lehenga-choli",
     gender: "girls",
     ageGroup: "kids",
@@ -140,7 +140,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "girls-teal-blue-lehenga-choli",
-    name: "Girls Teal Blue Lehenga Choli",
+    name: "Teal Blue Lehenga Set",
     category: "girls-lehenga-choli",
     gender: "girls",
     ageGroup: "kids",
@@ -153,7 +153,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "girls-silver-grey-floral-cape-lehenga",
-    name: "Girls Silver Grey Floral Cape Lehenga",
+    name: "Silver Grey Cape Lehenga",
     category: "girls-lehenga-choli",
     gender: "girls",
     ageGroup: "kids",
