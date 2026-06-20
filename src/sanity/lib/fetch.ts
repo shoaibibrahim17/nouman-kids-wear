@@ -1,4 +1,4 @@
-import { clientWithRevalidate } from './client'
+import { clientWithRevalidate, isSanityConfigured } from './client'
 import type { QueryParams } from 'next-sanity'
 
 /**
@@ -19,10 +19,9 @@ export async function fetchSanity<T>(
   revalidate: number = 60
 ): Promise<T | null> {
   try {
-    // Check if Sanity is configured
-    const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-    if (!projectId) {
-      console.log('Sanity CMS not configured - using fallback data')
+    // If Sanity is not configured, return fallback immediately
+    if (!isSanityConfigured || !clientWithRevalidate) {
+      console.log('[Sanity] CMS not configured - using fallback data')
       return fallbackData || null
     }
 
@@ -40,13 +39,14 @@ export async function fetchSanity<T>(
     
     // If no data from CMS, use fallback
     if (!data || (Array.isArray(data) && data.length === 0)) {
-      console.log('No data from Sanity CMS - using fallback data')
+      console.log('[Sanity] No data from CMS - using fallback data')
       return fallbackData || null
     }
 
+    console.log('[Sanity] Fetched data from CMS')
     return data
   } catch (error) {
-    console.error('Error fetching from Sanity:', error)
+    console.error('[Sanity] Error fetching from CMS:', error)
     return fallbackData || null
   }
 }
