@@ -24,8 +24,8 @@ export const SITE = {
   },
   // Google Maps location
   mapUrl: "https://maps.app.goo.gl/8AsHwTKXUfPaXCgC9",
-  // Map embed URL for iframe (constructed from mapUrl or leave undefined to auto-generate)
-  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3777.4486831842846!2d78.53183!3d19.66517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd2e42d57d0c8c5%3A0x8e4e6de8f7d7bf7a!2sNouman%20Kids%20Wear!5e0!3m2!1sen!2sin!4v1671234567890!5m2!1sen!2sin",
+  // Map embed URL for iframe — set to undefined to auto-generate from the address above.
+  mapEmbedUrl: undefined,
   // Placeholder hours — confirm with the shop.
   hours: [
     { days: "Monday – Saturday", time: "10:00 AM – 9:30 PM" },
