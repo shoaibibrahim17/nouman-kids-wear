@@ -1,8 +1,8 @@
 import type { AgeGroupOption, Gender } from "@/types/product";
 
 // Central business / brand configuration.
-// NOTE: phone + WhatsApp numbers below are PLACEHOLDERS. Replace them with the
-// real Nouman Kids Wear contact details before going live.
+// NOTE: Phone, WhatsApp, address, and hours have been provided but should be
+// verified with the client before public launch.
 export const SITE = {
   name: "Nouman Kids Wear",
   shortName: "Nouman",
@@ -14,7 +14,8 @@ export const SITE = {
   // Human-friendly phone for tel: links and display.
   phoneDisplay: "+91 84989 86699",
   phoneHref: "+918498986699",
-  email: "noumankidswear@example.com",
+  // Email removed - add real client email when provided
+  // email: "",
   address: {
     line1: "Main Road, Near Clock Tower",
     city: "Adilabad",

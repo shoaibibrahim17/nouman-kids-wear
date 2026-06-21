@@ -50,7 +50,7 @@ export async function getStoreInfo(): Promise<StoreInfo> {
     phone: SITE.phoneDisplay,
     phoneHref: SITE.phoneHref,
     whatsappNumber: SITE.whatsappNumber,
-    email: SITE.email,
+    // email: undefined, // Removed - add real client email when provided
     hours: SITE.hours.map(h => ({ days: h.days, time: h.time })),
     mapEmbedUrl: SITE.mapEmbedUrl,
     social: SITE.social,

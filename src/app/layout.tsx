@@ -36,7 +36,7 @@ const keywords = [
 ];
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://noumankidswear.example.com"),
+  metadataBase: new URL("https://nouman-kids-wear.vercel.app"),
   title: {
     default: `${SITE.name} — Kids Wear in Adilabad, Telangana`,
     template: `%s | ${SITE.name}`,
