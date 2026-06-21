@@ -2,70 +2,34 @@ import type { Category, CategorySlug, Collection } from "@/types/product";
 
 export const CATEGORIES: Category[] = [
   {
-    slug: "boys-wear",
-    label: "Boys Wear",
-    description: "Shirts, t-shirts & sets",
-    accent: "sky",
-  },
-  {
     slug: "boys-ethnic-wear",
     label: "Boys Ethnic Wear",
     description: "Sherwanis, kurtas & festive sets",
-    accent: "peach",
+    accent: "sky",
   },
   {
-    slug: "girls-wear",
-    label: "Girls Wear",
-    description: "Frocks, tops & dresses",
-    accent: "blush",
+    slug: "girls-ethnic-wear",
+    label: "Girls Ethnic Wear",
+    description: "Ethnic gowns, lehengas & traditional sets",
+    accent: "peach",
   },
   {
     slug: "girls-party-wear",
     label: "Girls Party Wear",
     description: "Gowns & party dresses",
+    accent: "blush",
+  },
+  {
+    slug: "boys-party-wear",
+    label: "Boys Party Wear",
+    description: "Party shirts, blazers & dress sets",
     accent: "lilac",
   },
   {
-    slug: "girls-ethnic-wear",
-    label: "Girls Ethnic Wear",
-    description: "Ethnic gowns & traditional sets",
-    accent: "peach",
-  },
-  {
-    slug: "girls-lehenga-choli",
-    label: "Girls Lehenga Choli",
-    description: "Lehengas with choli & dupatta",
-    accent: "peach",
-  },
-  {
-    slug: "newborn",
-    label: "Newborn",
-    description: "Soft essentials 0–12m",
+    slug: "jackets-winter-wear",
+    label: "Jackets & Winter Wear",
+    description: "Warm jackets & winter essentials",
     accent: "mint",
-  },
-  {
-    slug: "party-wear",
-    label: "Party Wear",
-    description: "Dressy occasion looks",
-    accent: "lilac",
-  },
-  {
-    slug: "ethnic-wear",
-    label: "Ethnic Wear",
-    description: "Kurta sets & lehengas",
-    accent: "peach",
-  },
-  {
-    slug: "casual-wear",
-    label: "Casual Wear",
-    description: "Everyday comfort fits",
-    accent: "mint",
-  },
-  {
-    slug: "shoes-accessories",
-    label: "Shoes & Accessories",
-    description: "Footwear & finishing touches",
-    accent: "sky",
   },
 ];
 

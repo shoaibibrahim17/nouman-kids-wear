@@ -6,17 +6,11 @@ export type Gender = "boys" | "girls" | "unisex";
 export type AgeGroup = "newborn" | "toddler" | "kids" | "juniors";
 
 export type CategorySlug =
-  | "boys-wear"
   | "boys-ethnic-wear"
-  | "girls-wear"
-  | "girls-party-wear"
   | "girls-ethnic-wear"
-  | "girls-lehenga-choli"
-  | "newborn"
-  | "party-wear"
-  | "ethnic-wear"
-  | "casual-wear"
-  | "shoes-accessories";
+  | "girls-party-wear"
+  | "boys-party-wear"
+  | "jackets-winter-wear";
 
 export type CollectionSlug =
   | "festival-wear"

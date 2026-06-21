@@ -8,7 +8,7 @@ Complete guide for importing initial product catalogue into Sanity CMS.
 
 The seed script:
 - ✅ Uploads real product images from `public/images/products/` to Sanity CDN
-- ✅ Creates 4 categories (Boys Ethnic Wear, Girls Party Wear, etc.)
+- ✅ Creates 5 categories (Boys/Girls Ethnic & Party Wear, Jackets)
 - ✅ Creates 14 products with proper category references
 - ✅ Sets up new arrivals (4 jacket gowns)
 - ✅ Makes all products **fully editable in Sanity Studio**
@@ -135,10 +135,11 @@ npm run sanity:seed
 
 📁 Seeding categories...
   ✓ Boys Ethnic Wear
-  ✓ Girls Party Wear
   ✓ Girls Ethnic Wear
-  ✓ Girls Lehenga Choli
-✅ Created 4 categories
+  ✓ Girls Party Wear
+  ✓ Boys Party Wear
+  ✓ Jackets & Winter Wear
+✅ Created 5 categories
 
 🛍️  Seeding products...
   ✓ Uploaded: boys-black-ethnic-sherwani-1-14yr.jpeg
@@ -151,7 +152,7 @@ npm run sanity:seed
 ✨ Seed completed successfully!
 
 Summary:
-  • 4 categories
+  • 5 categories
   • 14 products
   • 11 images uploaded
 
@@ -164,7 +165,7 @@ Summary:
 ```
 
 **What it does:**
-1. Creates 4 categories with stable IDs
+1. Creates 5 categories with stable IDs
 2. Uploads 11 product images to Sanity CDN
 3. Creates 14 product documents with image references
 4. Marks 4 products as "New Arrivals"
@@ -180,7 +181,7 @@ npm run sanity:check
 
 **Expected output:**
 ```
-📁 Categories: 4
+📁 Categories: 5
 🛍️  Products (total): 14
   └─ Active: 14
   └─ New Arrivals: 4
@@ -208,7 +209,7 @@ All counts should match the seed script output.
    - ✅ Each product has an image thumbnail
    - ✅ Products show "Published" status (green checkmark)
    - ✅ You can click and edit any product
-   - ✅ **Categories** section shows 4 categories
+   - ✅ **Categories** section shows 5 categories
 
 **Important:** Products are created as **published documents** by default. They should already be live, not drafts.
 
@@ -257,12 +258,13 @@ Build should complete with 0 errors.
 
 ## Seeded Products List
 
-### Categories (4)
+### Categories (5)
 
 1. **Boys Ethnic Wear** (Sky blue accent)
-2. **Girls Party Wear** (Blush pink accent)
-3. **Girls Ethnic Wear** (Peach accent)
-4. **Girls Lehenga Choli** (Mint green accent)
+2. **Girls Ethnic Wear** (Peach accent) - includes lehengas and traditional wear
+3. **Girls Party Wear** (Blush pink accent)
+4. **Boys Party Wear** (Lilac accent)
+5. **Jackets & Winter Wear** (Mint green accent)
 
 ### Products (14)
 
@@ -278,11 +280,9 @@ Build should complete with 0 errors.
 7. **NEW** Girls Olive Green Jacket Gown (4–10 Years, size 24×40)
 8. **NEW** Girls Maroon Jacket Gown (4–10 Years, size 24×40)
 
-#### Girls Ethnic Wear (2)
+#### Girls Ethnic Wear (6)
 9. Girls Black Embroidered Ethnic Gown (4–10 Years, size 4×10)
 10. **NEW** Girls Mint Green Embroidered Gown (4–10 Years, size 4×10)
-
-#### Girls Lehenga Choli (4)
 11. Girls Beige Gold Lehenga Choli (4–14 Years, size 4×14)
 12. **NEW** Girls Olive Green Lehenga Choli (4–14 Years, size 4×14)
 13. Girls Silver Grey Floral Cape Lehenga (4–14 Years, size 4×14)

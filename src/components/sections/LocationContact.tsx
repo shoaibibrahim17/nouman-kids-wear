@@ -28,11 +28,13 @@ export function LocationContact({ storeInfo }: LocationContactProps) {
 
   const { address } = siteData;
   const fullAddress = `${address.line1}, ${address.city}, ${address.state} ${address.pincode}`;
+  
+  // Use mapUrl if available (from SITE data), otherwise construct from address
   const mapsQuery = encodeURIComponent(`${siteData.brandName}, ${fullAddress}`);
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+  const mapsUrl = SITE.mapUrl || `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
   
   // Use custom map embed URL if provided, otherwise use default query-based embed
-  const embedUrl = siteData.mapEmbedUrl || `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
+  const embedUrl = siteData.mapEmbedUrl || SITE.mapEmbedUrl || `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
 
   return (
     <Section id="contact">

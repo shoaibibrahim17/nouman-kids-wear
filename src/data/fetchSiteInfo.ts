@@ -52,6 +52,7 @@ export async function getStoreInfo(): Promise<StoreInfo> {
     whatsappNumber: SITE.whatsappNumber,
     email: SITE.email,
     hours: SITE.hours.map(h => ({ days: h.days, time: h.time })),
+    mapEmbedUrl: SITE.mapEmbedUrl,
     social: SITE.social,
   }
   
