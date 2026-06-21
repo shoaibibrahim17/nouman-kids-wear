@@ -24,7 +24,8 @@ export const SITE = {
   },
   // Google Maps location
   mapUrl: "https://maps.app.goo.gl/8AsHwTKXUfPaXCgC9",
-  // Map embed URL for iframe — set to undefined to auto-generate from the address above.
+  // Map embed URL for iframe — leave undefined to auto-generate from the full brand + address
+  // (see LocationContact.tsx line 37). Auto-generated URLs tend to be more specific.
   mapEmbedUrl: undefined,
   // Placeholder hours — confirm with the shop.
   hours: [
