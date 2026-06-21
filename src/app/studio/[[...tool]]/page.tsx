@@ -9,54 +9,15 @@
  * SECURITY: Studio authentication is handled by Sanity (no custom login).
  */
 
-import { useEffect, useState } from 'react'
-import dynamicImport from 'next/dynamic'
+import { NextStudio } from 'next-sanity/studio'
+import config from '@/../sanity.config'
 
 // Force dynamic rendering for this page
 export const dynamic = 'force-dynamic'
 
-// Dynamically import Studio components to avoid build issues
-const NextStudio = dynamicImport(
-  () => import('next-sanity/studio').then((mod) => mod.NextStudio),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-muted-foreground">Loading Studio...</p>
-      </div>
-    ),
-  }
-)
-
-// Get Sanity config at runtime
-function getSanityConfig() {
-  try {
-    return require('@/../sanity.config').default
-  } catch (error) {
-    console.error('Failed to load Sanity config:', error)
-    return null
-  }
-}
-
 export default function StudioPage() {
-  const [isConfigured, setIsConfigured] = useState<boolean | null>(null)
-
-  useEffect(() => {
-    // Check if Sanity is configured by trying to access the public env var
-    // This runs client-side and checks if the config was injected by Next.js
-    const config = getSanityConfig()
-    const hasProjectId = config?.projectId && config.projectId !== ''
-    setIsConfigured(hasProjectId)
-  }, [])
-
-  // Loading state
-  if (isConfigured === null) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-muted-foreground">Loading Studio...</p>
-      </div>
-    )
-  }
+  // Check if Sanity is configured
+  const isConfigured = config?.projectId && config.projectId !== ''
 
   // Not configured - show setup instructions
   if (!isConfigured) {
@@ -88,6 +49,7 @@ export default function StudioPage() {
   }
 
   // Configured - load Studio
-  const config = getSanityConfig()
   return <NextStudio config={config} />
 }
+
+
