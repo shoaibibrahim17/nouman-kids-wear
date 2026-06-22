@@ -146,6 +146,32 @@ export function Footer({ storeInfo }: FooterProps) {
             © {year} {siteData.brandName}. All rights reserved.
           </p>
           <p>Browse-and-enquire catalogue · No online checkout.</p>
+          <p className="flex items-center gap-1">
+            Designed & developed by{" "}
+            <a
+              href="https://www.linkedin.com/in/shaikh-ibrahim17?utm_source=share&utm_content=profile&utm_medium=member_android"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Sk Ibrahim on LinkedIn"
+              className="inline-flex items-center gap-0.5 transition-colors hover:text-foreground hover:underline hover:underline-offset-2"
+            >
+              Sk Ibrahim
+              <svg
+                className="size-3 transition-transform hover:translate-x-0.5 hover:-translate-y-0.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M7 17L17 7M17 7H7M17 7V17"
+                />
+              </svg>
+            </a>
+          </p>
         </div>
       </div>
     </footer>
