@@ -20,7 +20,7 @@ Before starting:
 1. ✅ Sanity project created at https://sanity.io/manage
 2. ✅ Environment variables added to `.env.local`:
    ```
-   NEXT_PUBLIC_SANITY_PROJECT_ID=ql5kwpe9
+   NEXT_PUBLIC_SANITY_PROJECT_ID=YOUR_SANITY_PROJECT_ID
    NEXT_PUBLIC_SANITY_DATASET=production
    NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
    ```
@@ -340,3 +340,4 @@ For technical issues, contact your web developer.
 **Migration Complete!** 🎉
 
 Your local data is now in Sanity CMS. The shop owner can manage everything from the Studio dashboard going forward.
+

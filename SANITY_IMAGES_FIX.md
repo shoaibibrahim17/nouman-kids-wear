@@ -165,7 +165,7 @@ Check:
 2. Environment variables correct?
    ```bash
    # Check .env.local has:
-   NEXT_PUBLIC_SANITY_PROJECT_ID=ql5kwpe9
+   NEXT_PUBLIC_SANITY_PROJECT_ID=YOUR_SANITY_PROJECT_ID
    NEXT_PUBLIC_SANITY_DATASET=production
    ```
 
@@ -217,3 +217,4 @@ The following files have been updated with this fix:
 
 **Last Updated:** June 18, 2026  
 **Status:** ✅ Fixed and documented
+

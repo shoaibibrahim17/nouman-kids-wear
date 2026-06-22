@@ -24,7 +24,7 @@ Add these in your Vercel project settings:
 
 #### 1. `NEXT_PUBLIC_SANITY_PROJECT_ID`
 
-- **Value:** `ql5kwpe9` (your Sanity project ID)
+- **Value:** `YOUR_SANITY_PROJECT_ID` (your Sanity project ID)
 - **Environment:** Production, Preview, Development (all)
 - **Exposed to browser:** Yes (safe - it's just a project identifier)
 
@@ -65,7 +65,7 @@ Add these in your Vercel project settings:
 3. Before clicking "Deploy", scroll to **Environment Variables** section
 4. Add each variable:
    - Variable name: `NEXT_PUBLIC_SANITY_PROJECT_ID`
-   - Value: `ql5kwpe9`
+   - Value: `YOUR_SANITY_PROJECT_ID`
    - Environments: Check all (Production, Preview, Development)
    - Click "Add"
 5. Repeat for the other two variables
@@ -79,7 +79,7 @@ Add these in your Vercel project settings:
 4. Click **"Add New"** button
 5. For each variable:
    - **Key:** `NEXT_PUBLIC_SANITY_PROJECT_ID`
-   - **Value:** `ql5kwpe9`
+   - **Value:** `YOUR_SANITY_PROJECT_ID`
    - **Environments:** Select all (Production, Preview, Development)
    - Click **"Save"**
 6. Repeat for remaining variables
@@ -97,7 +97,7 @@ Copy these into Vercel (one at a time):
 ```
 Variable 1:
 Key: NEXT_PUBLIC_SANITY_PROJECT_ID
-Value: ql5kwpe9
+Value: YOUR_SANITY_PROJECT_ID
 Environments: ✅ Production ✅ Preview ✅ Development
 
 Variable 2:
@@ -466,7 +466,7 @@ Vercel provides:
 **Add these 3 variables in Vercel project settings:**
 
 ```
-NEXT_PUBLIC_SANITY_PROJECT_ID=ql5kwpe9
+NEXT_PUBLIC_SANITY_PROJECT_ID=YOUR_SANITY_PROJECT_ID
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
 ```
@@ -483,3 +483,4 @@ NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
 **Deployment Status:** Ready to deploy! 🚀  
 **Estimated Setup Time:** 10–15 minutes  
 **Cost:** $0/month (free Vercel + free Sanity plans)
+

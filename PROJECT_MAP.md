@@ -442,7 +442,7 @@ Comprehensive step-by-step instructions for shop owner:
 
 Required (if using CMS):
 ```
-NEXT_PUBLIC_SANITY_PROJECT_ID=ql5kwpe9
+NEXT_PUBLIC_SANITY_PROJECT_ID=YOUR_SANITY_PROJECT_ID
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
 SANITY_API_TOKEN=<token>  # Only needed for preview/draft mode
@@ -462,3 +462,4 @@ Added as part of CMS integration:
 
 **Last updated**: Session start  
 **Next action**: Fix splash video, hero background, new arrivals auto-slider, brand title, UI polish
+

@@ -25,14 +25,14 @@ Before running the seed:
 ### 1. Sanity Project Created
 
 - ✅ Project created at https://sanity.io/manage
-- ✅ Project ID: `ql5kwpe9`
+- ✅ Project ID: `YOUR_SANITY_PROJECT_ID`
 - ✅ Dataset: `production`
 
 ### 2. Environment Variables Set
 
 Check `.env.local` has:
 ```
-NEXT_PUBLIC_SANITY_PROJECT_ID=ql5kwpe9
+NEXT_PUBLIC_SANITY_PROJECT_ID=YOUR_SANITY_PROJECT_ID
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
 ```
@@ -95,7 +95,7 @@ npm run sanity:check
 🔍 Checking Sanity CMS connection...
 
 Configuration:
-  • Project ID: ql5kwpe9
+  • Project ID: YOUR_SANITY_PROJECT_ID
   • Dataset: production
   • API Version: 2024-01-01
 
@@ -130,7 +130,7 @@ npm run sanity:seed
 ```
 🌱 Starting Sanity CMS seed...
 
-📦 Project: ql5kwpe9
+📦 Project: YOUR_SANITY_PROJECT_ID
 📊 Dataset: production
 
 📁 Seeding categories...
@@ -421,7 +421,7 @@ The dev script has been updated to bypass this check. Simply restart your dev se
 **Cause:** CMS not configured or connection issue
 
 **Fix:**
-1. Check `.env.local` has `NEXT_PUBLIC_SANITY_PROJECT_ID=ql5kwpe9`
+1. Check `.env.local` has `NEXT_PUBLIC_SANITY_PROJECT_ID=YOUR_SANITY_PROJECT_ID`
 2. Run `npm run sanity:check` to verify connection
 3. Restart dev server: `npm run dev`
 
@@ -511,3 +511,4 @@ For Sanity-specific issues:
 ---
 
 **Last Updated:** June 2026
+

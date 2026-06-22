@@ -272,7 +272,7 @@ Organized by priority. Complete Phase 1 before launch. Phase 2 can be iterative 
 - Helpful descriptions guide data entry
 
 **Current State**:
-- ✅ Sanity project created (ID: `ql5kwpe9`)
+- ✅ Sanity project created (ID: `YOUR_SANITY_PROJECT_ID`)
 - ✅ Initial catalogue imported (14 products, 4 categories)
 - ✅ Products visible and editable in Studio
 - ✅ Website displays CMS products (confirmed via console logs)
@@ -344,3 +344,4 @@ After going live:
 
 **Last updated**: Session start  
 **Next action**: Start Phase 1 fixes (splash video, hero background, auto-slider)
+
